@@ -116,6 +116,44 @@ nameserver 127.0.0.1
 
 E pronto, o **DNSCrypt-Proxy** já está instalado e configurado no teu sistema.
 
+#Update
+
+##Bloqueando malwares, trackers e anúncios
+
+O ***DNSCrypt-Proxy*** é muito poderoso como vocês puderam ver, mas também não é apenas um DNS seguro, mas também é possível bloquear anúncios, trackers e malwares utilizando o ***DNSCrypt-Proxy***, para isto, é necessário baixar [este arquivo](https://download.dnscrypt.org/blacklists/domains/mybase.txt). Este arquivo contem domínios na qual o ***DNSCrypt-Proxy*** deverá bloquea-los. Depois de baixar este arquivo, devemos dar este comando:
+
+~~~
+$ sudo cp ~/Downloads/mybase.txt /etc/dnscrypt-blacklist-domains.txt
+~~~
+
+***OBS***: *Caso o arquivo não esteja em "~/Downloads", veja aonde ele está salvo.*
+
+Agora, abra o arquivo "***/etc/dnscrypt-proxy.conf***":
+
+~~~
+$ sudo gedit /etc/dnscrypt-proxy.conf
+~~~
+
+Pesquise pela linha:
+
+> ***#BlackList domains:"/etc/dnscrypt-blacklist-domains.txt" logfile:"/var/log/dnscrypt-blocked.log"***
+
+A linha correspondente aqui, é a linha de número "*199*".
+
+Depois de encontrar a linha, descomente-a, tirando o "***#***" do início da linha, ela deverá ficar assim:
+
+~~~
+BlackList domains:"/etc/dnscrypt-blacklist-domains.txt" logfile:"/var/log/dnscrypt-blocked.log"
+~~~
+
+Agora, reinicie o ***DNSCrypt-Proxy***, para isto, de este comando:
+
+~~~
+$ sudo systemctl restart dnscrypt-proxy
+~~~
+
+Depois de reiniciar, seja feliz com o ***DNSCrypt-Proxy***
+
 ## Final
 
 E este foi o post de hoje, espero que ele tenha sido muito util, para você que usa Windows ou outros sistemas, irei deixar alguns links sobre como instalar o **DNSCrypt-Proxy** em outros sistemas:
